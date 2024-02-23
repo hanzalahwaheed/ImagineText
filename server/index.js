@@ -4,6 +4,8 @@ const path = require("path");
 const tesseract = require("tesseract.js");
 const cors = require("cors");
 
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 app.use(express.static(path.join(__dirname + "/uploads")));
@@ -36,6 +38,6 @@ app.post("/extractTextFromImage", upload.single("file"), async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log("server started");
 });
