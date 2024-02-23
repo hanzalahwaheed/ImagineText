@@ -37,7 +37,8 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/extractTextFromImage",
+        // "http://localhost:5000/extractTextFromImage", // for running locally
+        "https://imaginetext.onrender.com/extractTextFromImage", // for running when deployed on render
         formData,
         {
           headers: {
@@ -80,7 +81,11 @@ const App = () => {
           />
           {selectedImage && (
             <div>
-              <img src={selectedImage} alt="Selected" className="max-w-60 p-2" />
+              <img
+                src={selectedImage}
+                alt="Selected"
+                className="max-w-60 p-2"
+              />
             </div>
           )}
           <button
