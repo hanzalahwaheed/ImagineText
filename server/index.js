@@ -25,6 +25,10 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+app.get("/", (req, res) => {
+  res.json("Default get page :)");
+});
+
 app.post("/extractTextFromImage", upload.single("file"), async (req, res) => {
   console.log(req.file.path);
   try {
