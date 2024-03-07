@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Clipboard from "clipboard";
+
 const App = () => {
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,7 +32,7 @@ const App = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    alert("Processing image. Please Wait :)");
     const formData = new FormData();
     formData.append("file", event.target.file.files[0]);
 
@@ -46,7 +47,7 @@ const App = () => {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       setText(response.data.text);
     } catch (error) {
       console.error("Error:", error);
