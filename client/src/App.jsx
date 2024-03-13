@@ -39,7 +39,7 @@ const App = () => {
     try {
       const response = await axios.post(
         // "http://localhost:5000/extractTextFromImage", // for running locally
-        "https://imaginetext.onrender.com/extractTextFromImage", // for running when deployed on render
+        "https://imaginetext.onrender.com/api/extractTextFromImage",
         formData,
         {
           headers: {
@@ -47,7 +47,6 @@ const App = () => {
           },
         }
       );
-      // console.log(response);
       setText(response.data.text);
     } catch (error) {
       console.error("Error:", error);

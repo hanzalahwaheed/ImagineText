@@ -20,18 +20,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// var storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(
-//       null,
-//       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
-
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -42,11 +30,7 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage: storage });
 
-app.get("/", (req, res) => {
-  res.json("Default get page :)");
-});
-
-app.post("/extractTextFromImage", upload.single("file"), async (req, res) => {
+app.post("/api/extractTextFromImage", upload.single("file"), async (req, res) => {
   console.log(req.file.path);
   try {
     const {
