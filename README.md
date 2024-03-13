@@ -74,7 +74,8 @@ You can get your cloudinary keys from [here](https://cloudinary.com/)
 
 ## Screenshots
 
-(pending)
+![image](https://github.com/hanzalahwaheed/ImagineText/assets/101456741/3052e0e5-19db-471c-af3b-a072810c3262)
+
 
 
 ## Authors
