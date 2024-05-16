@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Clipboard from "clipboard";
 
@@ -38,8 +38,7 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        // "http://localhost:5000/extractTextFromImage", // for running locally
-        "https://imaginetext.onrender.com/api/extractTextFromImage",
+        `${import.meta.env.VITE_API_URL}/api/extractTextFromImage`,
         formData,
         {
           headers: {

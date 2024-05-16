@@ -7,13 +7,12 @@ const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const dotenv = require("dotenv");
 dotenv.config();
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
 app.use(express.static(path.join(__dirname + "/uploads")));
 app.use(cors());
-
 cloudinary.config({
   cloud_name: "imagine-text-cloudinary",
   api_key: process.env.CLOUDINARY_API_KEY,
