@@ -56,14 +56,14 @@ const App = () => {
 
   return (
     <div className="flex flex-col justify-center h-screen items-center font-poppins text-xs">
-      <div className="flex flex-col justify-center items-center p-6 w-3/4">
+      <div className="flex flex-col justify-center items-center p-6 w-1/2">
         <Heading content="ImagineText" />
         <SubHeading
           content="Introducing Imagine Text 🌟. Harness TesseractJS to effortlessly
           convert image text into editable, copyable text. Unleash the power of
           visualization! 💡📷🔍"
         />
-        <div className="flex flex-row justify-between p-4 rounded bg-gray-300 mt-4 w-3/4">
+        <div className="flex flex-row justify-between p-4 rounded bg-gray-300 mt-4 w-max">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center justify-between p-2"
