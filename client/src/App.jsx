@@ -94,29 +94,29 @@ const App = () => {
           )}
           <button
             type="submit"
-            className="bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4  rounded"
+            className="bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4 rounded"
             disabled={loading}
           >
             Submit
           </button>
         </form>
-        <div className="flex flex-col justify-between items-center p-2 w-1/2">
+        <div className="flex flex-col justify-between items-center p-2 w-1/2 h-full">
           <label htmlFor="text" className="mb-4 font-semibold">
             Extracted Text:
           </label>
           {loading ? (
             <Spinner />
           ) : (
-            <textarea
-              className="resize-none border border-gray-300 rounded-md p-1"
-              id="text"
-              cols="30"
-              rows="10"
-              value={text}
-              readOnly
-              ref={textareaRef}
-              onChange={(e) => setText(e.target.value)}
-            ></textarea>
+            <div className="flex-grow w-full">
+              <textarea
+                className="resize-none border border-gray-300 rounded-md p-1 w-full h-full"
+                id="text"
+                value={text}
+                readOnly
+                ref={textareaRef}
+                onChange={(e) => setText(e.target.value)}
+              ></textarea>
+            </div>
           )}
 
           <button
