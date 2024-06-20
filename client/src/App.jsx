@@ -3,10 +3,12 @@ import axios from "axios";
 import Clipboard from "clipboard";
 import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";
+import Spinner from "./components/Spinner";
 
 const App = () => {
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const textareaRef = useRef(null);
 
   const handleCopyToClipboard = () => {
@@ -34,6 +36,7 @@ const App = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     alert("Processing image. Please Wait :)");
     const formData = new FormData();
     formData.append("file", event.target.file.files[0]);
@@ -49,58 +52,63 @@ const App = () => {
         }
       );
       setText(response.data.text);
+      setLoading(false);
     } catch (error) {
       console.error("Error:", error);
+      setLoading(false); // Ensure loading is set to false in case of an error
     }
   };
 
   return (
     <div className="flex flex-col justify-center h-screen items-center font-poppins text-xs">
-      <div className="flex flex-col justify-center items-center p-6 w-1/2">
-        <Heading content="ImagineText" />
-        <SubHeading
-          content="Introducing Imagine Text 🌟. Harness TesseractJS to effortlessly
+      <Heading content="ImagineText" />
+      <SubHeading
+        content="Introducing Imagine Text 🌟. Harness TesseractJS to effortlessly
           convert image text into editable, copyable text. Unleash the power of
           visualization! 💡📷🔍"
-        />
-        <div className="flex flex-row justify-between p-4 rounded bg-gray-300 mt-4 w-max">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col items-center justify-between p-2"
+      />
+      <div className="flex justify-between p-4 rounded bg-gray-300 mt-4 w-2/5 min-h-96">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center justify-between p-2 w-1/2"
+        >
+          <label htmlFor="file" className="font-semibold mb-4">
+            Select Your Image
+          </label>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            className="rounded"
+            onChange={handleImageChange}
+            accept="image/*"
+          />
+          {selectedImage && (
+            <div>
+              <img
+                src={selectedImage}
+                alt="Selected"
+                className="max-w-60 max-h-96 p-2"
+              />
+            </div>
+          )}
+          <button
+            type="submit"
+            className="bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4  rounded"
+            disabled={loading}
           >
-            <label htmlFor="file" className="font-semibold mb-4">
-              Select Your Image{" "}
-            </label>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              className="rounded"
-              onChange={handleImageChange}
-              accept="image/*"
-            />
-            {selectedImage && (
-              <div>
-                <img
-                  src={selectedImage}
-                  alt="Selected"
-                  className="max-w-60 p-2"
-                />
-              </div>
-            )}
-            <button
-              type="submit"
-              className="bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4  rounded"
-            >
-              Submit
-            </button>
-          </form>
-          <div className="flex flex-col justify-between items-center p-2">
-            <label htmlFor="text" className="mb-4 font-semibold">
-              Extracted Text:
-            </label>
+            Submit
+          </button>
+        </form>
+        <div className="flex flex-col justify-between items-center p-2 w-1/2">
+          <label htmlFor="text" className="mb-4 font-semibold">
+            Extracted Text:
+          </label>
+          {loading ? (
+            <Spinner />
+          ) : (
             <textarea
-              className="resize-none border border-gray-300 rounded-md px-3 py-2"
+              className="resize-none border border-gray-300 rounded-md p-1"
               id="text"
               cols="30"
               rows="10"
@@ -109,15 +117,16 @@ const App = () => {
               ref={textareaRef}
               onChange={(e) => setText(e.target.value)}
             ></textarea>
-            <button
-              type="submit"
-              className="copy-btn mt-4 bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4 rounded"
-              data-clipboard-target="#textArea"
-              onClick={handleCopyToClipboard}
-            >
-              Copy to Clipboard
-            </button>
-          </div>
+          )}
+
+          <button
+            type="submit"
+            className="copy-btn mt-4 bg-gray-200 hover:bg-gray-400 text-gray-800 w-1/2 font-semibold py-2 px-4 rounded"
+            data-clipboard-target="#text"
+            onClick={handleCopyToClipboard}
+          >
+            Copy to Clipboard
+          </button>
         </div>
       </div>
     </div>
