@@ -37,6 +37,15 @@ Start Server
 ```bash
   node index.js
 ```
+Add the following environment variables to your .env file in the server folder
+
+`PORT`
+
+`CLOUDINARY_API_KEY`
+
+`CLOUDINARY_API_SECRET`
+
+You can get your cloudinary keys from [here](https://cloudinary.com/)
 
 Start Client
 
@@ -46,19 +55,13 @@ Start Client
 ```bash
   npm run dev
 ```
+Add the following environment variables to your .env file in the client folder
 
+`VITE_API_URL=http://localhost:5000`
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file in the server folder
-
-`PORT`
-
-`CLOUDINARY_API_KEY`
-
-`CLOUDINARY_API_SECRET`
-
-You can get your cloudinary keys from [here](https://cloudinary.com/)
+To run this project, you will need to 
 ## API Reference
 
 #### Get all items
