@@ -29,17 +29,21 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage: storage });
 
-app.post("/api/extractTextFromImage", upload.single("file"), async (req, res) => {
-  console.log(req.file.path);
-  try {
-    const {
-      data: { text },
-    } = await tesseract.recognize(req.file.path, "eng");
-    res.json({ text });
-  } catch (error) {
-    console.log("error in post", error);
+app.post(
+  "/api/extractTextFromImage",
+  upload.single("file"),
+  async (req, res) => {
+    console.log(req.file.path);
+    try {
+      const {
+        data: { text },
+      } = await tesseract.recognize(req.file.path, "eng");
+      res.json({ text });
+    } catch (error) {
+      console.log("error in post", error);
+    }
   }
-});
+);
 
 app.listen(PORT, () => {
   console.log("server started");

@@ -47,6 +47,8 @@ Add the following environment variables to your .env file in the server folder
 
 You can get your cloudinary keys from [here](https://cloudinary.com/)
 
+Create a directory called `uploads` in the server as well.
+
 Start Client
 
 ```bash
